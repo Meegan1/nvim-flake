@@ -44,7 +44,7 @@ local git_ignored_files, git_ignored_dirs, git_ignored_full_paths = get_git_igno
 
 return {
 	"oil.nvim",
-	for_cat = "general",
+	for_cat = "oil",
 	priority = 1000,
 	lazy = false,
 	after = function()

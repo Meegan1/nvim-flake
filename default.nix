@@ -77,14 +77,13 @@ let
         general = with pkgs.vimPlugins; [
           lze
           lzextras
-          oil-nvim
         ];
-
-        treesitter = pkgs.vimPlugins.nvim-treesitter;
 
         lsp = with pkgs.vimPlugins; [
           nvim-lspconfig
         ];
+
+        treesitter = pkgs.vimPlugins.nvim-treesitter;
 
         themer =
           let
@@ -100,6 +99,9 @@ let
             };
           in
           (pkgs.lib.attrByPath [ scheme ] schemes.${defaultScheme} schemes);
+
+        auto-session = pkgs.vimPlugins.auto-session;
+        oil = pkgs.vimPlugins.oil-nvim;
       };
 
       optionalPlugins = {
@@ -187,7 +189,9 @@ let
 
           arrow = true;
           autopairs = true;
+          auto-session = true;
           blink = true;
+          oil = true;
 
           test = true;
           example = {

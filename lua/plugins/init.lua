@@ -18,6 +18,9 @@ return {
 		import = "plugins.autopairs",
 	},
 	{
+		import = "plugins.auto-session",
+	},
+	{
 		import = "plugins.blink",
 	},
 }
