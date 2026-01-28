@@ -127,6 +127,7 @@ let
           codecompanion-history-nvim
           pkgs.neovimPlugins.mcphub-nvim
         ];
+        colorizer = pkgs.vimPlugins.nvim-colorizer-lua;
         conform = pkgs.vimPlugins.conform-nvim;
         copilot = pkgs.vimPlugins.copilot-lua;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
@@ -212,6 +213,7 @@ let
           auto-session = true;
           blink = true;
           codecompanion = true;
+          colorizer = true;
           conform = true;
           copilot = true;
           fzf-lua = true;

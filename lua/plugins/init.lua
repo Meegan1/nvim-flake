@@ -27,6 +27,9 @@ return {
 		import = "plugins.codecompanion",
 	},
 	{
+		import = "plugins.colorizer",
+	},
+	{
 		import = "plugins.copilot",
 	},
 	{
