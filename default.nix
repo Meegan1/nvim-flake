@@ -127,7 +127,16 @@ let
           codecompanion-history-nvim
           pkgs.neovimPlugins.mcphub-nvim
         ];
+        copilot = pkgs.vimPlugins.copilot-lua;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
+        lualine =
+          with pkgs.vimPlugins;
+          [
+            lualine-nvim
+          ]
+          ++ pkgs.lib.optionals packageDef.categories.copilot [
+            copilot-lualine
+          ];
       };
 
       # shared libraries to be added to LD_LIBRARY_PATH
@@ -201,7 +210,9 @@ let
           auto-session = true;
           blink = true;
           codecompanion = true;
+          copilot = true;
           fzf-lua = true;
+          lualine = true;
           oil = true;
 
           test = true;

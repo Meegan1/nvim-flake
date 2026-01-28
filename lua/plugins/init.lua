@@ -27,6 +27,9 @@ return {
 		import = "plugins.codecompanion",
 	},
 	{
+		import = "plugins.copilot",
+	},
+	{
 		import = "plugins.fzf-lua",
 	},
 	{
@@ -34,6 +37,9 @@ return {
 	},
 	{
 		import = "plugins.gitsigns",
+	},
+	{
+		import = "plugins.lualine",
 	},
 	{
 		import = "plugins.mcphub",
