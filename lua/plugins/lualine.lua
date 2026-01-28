@@ -7,6 +7,9 @@ return {
 		"lualine.nvim",
 		for_cat = "lualine",
 		after = function()
+			vim.o.laststatus = 3
+			vim.opt.cmdheight = 0
+
 			local CodeCompanionStatus = require("lualine.component"):extend()
 
 			CodeCompanionStatus.processing = false
