@@ -137,6 +137,7 @@ let
           ++ pkgs.lib.optionals packageDef.categories.copilot [
             copilot-lualine
           ];
+        which-key = pkgs.vimPlugins.which-key-nvim;
       };
 
       # shared libraries to be added to LD_LIBRARY_PATH
@@ -214,6 +215,7 @@ let
           fzf-lua = true;
           lualine = true;
           oil = true;
+          which-key = true;
 
           test = true;
           example = {

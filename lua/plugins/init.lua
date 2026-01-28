@@ -44,4 +44,7 @@ return {
 	{
 		import = "plugins.mcphub",
 	},
+	{
+		import = "plugins.which-key",
+	},
 }

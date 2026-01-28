@@ -86,11 +86,6 @@ return {
 				load_oil,
 				-- Get rid of all previous tasks when restoring a session
 				function()
-					vim.notify(
-						"Loading oil.nvim as part of session restore",
-						vim.log.levels.INFO,
-						{ title = "auto-session" }
-					)
 					if nixCats("overseer") ~= true then
 						return
 					end
