@@ -30,6 +30,9 @@ return {
 		import = "plugins.colorizer",
 	},
 	{
+		import = "plugins.comment",
+	},
+	{
 		import = "plugins.copilot",
 	},
 	{

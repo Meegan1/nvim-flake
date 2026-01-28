@@ -129,6 +129,10 @@ let
         ];
         colorizer = pkgs.vimPlugins.nvim-colorizer-lua;
         conform = pkgs.vimPlugins.conform-nvim;
+        comment = with pkgs.vimPlugins; [
+          nvim-ts-context-commentstring
+          comment-nvim
+        ];
         copilot = pkgs.vimPlugins.copilot-lua;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
         lualine =
@@ -215,6 +219,7 @@ let
           codecompanion = true;
           colorizer = true;
           conform = true;
+          comment = true;
           copilot = true;
           fzf-lua = true;
           lualine = true;
