@@ -48,6 +48,9 @@ return {
 		import = "plugins.dashboard",
 	},
 	{
+		import = "plugins.flash",
+	},
+	{
 		import = "plugins.fzf-lua",
 	},
 	{
@@ -55,6 +58,12 @@ return {
 	},
 	{
 		import = "plugins.gitsigns",
+	},
+	{
+		import = "plugins.glance",
+	},
+	{
+		import = "plugins.grug-far",
 	},
 	{
 		import = "plugins.lualine",

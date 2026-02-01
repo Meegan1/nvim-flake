@@ -198,7 +198,10 @@ let
           nvim-dap-ui
           nvim-dap-virtual-text
         ];
+        flash = pkgs.vimPlugins.flash-nvim;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
+        glance = pkgs.vimPlugins.glance-nvim;
+        grug-far = pkgs.vimPlugins.grug-far-nvim;
         lualine =
           with pkgs.vimPlugins;
           [
@@ -290,7 +293,10 @@ let
           dadbod = true;
           dap = true;
           dashboard = true;
+          flash = true;
           fzf-lua = true;
+          glance = true;
+          grug-far = true;
           lualine = true;
           oil = true;
           surround = true;
