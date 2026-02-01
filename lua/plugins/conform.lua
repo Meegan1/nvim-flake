@@ -1,5 +1,5 @@
 return {
-	"stevearc/conform.nvim",
+	"conform.nvim",
 	for_cat = "conform",
 	after = function()
 		local devenv = require("utils.dev-env")
@@ -34,40 +34,6 @@ return {
 			end)
 		)
 
-		return {
-			-- Define your formatters
-			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = prettier,
-				typescript = prettier,
-				typescriptreact = prettier,
-				javascriptreact = prettier,
-				liquid = prettier,
-				json = prettier,
-				helm = prettier,
-				yaml = prettier,
-				nix = { "nixfmt", stop_after_first = true },
-				blade = prettier,
-				php = prettier,
-				astro = prettier,
-				mdx = prettier,
-				css = prettier,
-				scss = prettier,
-				tex = { "tex-fmt" },
-			},
-			-- Set up format-on-save
-			format_on_save = function(bufnr)
-				-- Disable with a global or buffer-local variable
-				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-					return
-				end
-
-				return { timeout_ms = 1000, lsp_format = "fallback" }
-			end,
-		}
-	end,
-	---@param opts ConformOpts
-	config = function(_, opts)
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
 				-- FormatDisable! will disable formatting just for this buffer
@@ -107,6 +73,36 @@ return {
 			require("conform").format({ async = true, lsp_format = "fallback", range = range })
 		end, { range = true })
 
-		require("conform").setup(opts)
+		require("conform").setup({
+			-- Define your formatters
+			formatters_by_ft = {
+				lua = { "stylua" },
+				javascript = prettier,
+				typescript = prettier,
+				typescriptreact = prettier,
+				javascriptreact = prettier,
+				liquid = prettier,
+				json = prettier,
+				helm = prettier,
+				yaml = prettier,
+				nix = { "nixfmt", stop_after_first = true },
+				blade = prettier,
+				php = prettier,
+				astro = prettier,
+				mdx = prettier,
+				css = prettier,
+				scss = prettier,
+				tex = { "tex-fmt" },
+			},
+			-- Set up format-on-save
+			format_on_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+
+				return { timeout_ms = 1000, lsp_format = "fallback" }
+			end,
+		})
 	end,
 }

@@ -33,6 +33,9 @@ return {
 		import = "plugins.colorizer",
 	},
 	{
+		import = "plugins.conform",
+	},
+	{
 		import = "plugins.comment",
 	},
 	{
@@ -64,6 +67,12 @@ return {
 	},
 	{
 		import = "plugins.grug-far",
+	},
+	{
+		import = "plugins.hydra",
+	},
+	{
+		import = "plugins.incline",
 	},
 	{
 		import = "plugins.lualine",

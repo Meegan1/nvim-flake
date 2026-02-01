@@ -202,6 +202,8 @@ let
         fzf-lua = pkgs.vimPlugins.fzf-lua;
         glance = pkgs.vimPlugins.glance-nvim;
         grug-far = pkgs.vimPlugins.grug-far-nvim;
+        hydra = pkgs.vimPlugins.hydra-nvim;
+        incline = pkgs.vimPlugins.incline-nvim;
         lualine =
           with pkgs.vimPlugins;
           [
@@ -212,6 +214,7 @@ let
           ];
         surround = pkgs.vimPlugins.nvim-surround;
         which-key = pkgs.vimPlugins.which-key-nvim;
+        window-management = pkgs.vimPlugins.smart-splits-nvim;
       };
 
       # shared libraries to be added to LD_LIBRARY_PATH
@@ -297,10 +300,13 @@ let
           fzf-lua = true;
           glance = true;
           grug-far = true;
+          hydra = true;
+          incline = true;
           lualine = true;
           oil = true;
           surround = true;
           which-key = true;
+          window-management = true;
 
           test = true;
           example = {
