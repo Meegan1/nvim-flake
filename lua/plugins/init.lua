@@ -87,6 +87,9 @@ return {
 		import = "plugins.mdx",
 	},
 	{
+		import = "plugins.neotest",
+	},
+	{
 		import = "plugins.nvim-surround",
 	},
 	{
