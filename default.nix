@@ -214,11 +214,15 @@ let
             copilot-lualine
           ];
         mdx = pkgs.neovimPlugins.mdx-nvim;
+        noice = with pkgs.vimPlugins; [
+          noice-nvim
+          nui-nvim
+        ];
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
-          nvim-nio
           neotest
           neotest-vitest
+          nvim-nio
         ];
         which-key = pkgs.vimPlugins.which-key-nvim;
         window-management = pkgs.vimPlugins.smart-splits-nvim;
@@ -312,6 +316,7 @@ let
           kulala = true;
           lualine = true;
           mdx = true;
+          noice = true;
           oil = true;
           surround = true;
           testing = true;
@@ -319,14 +324,13 @@ let
           window-management = true;
 
           test = true;
-          example = {
-            youCan = "add more than just booleans";
-            toThisSet = [
-              "and the contents of this categories set"
-              "will be accessible to your lua with"
-              "nixCats('path.to.value')"
-              "see :help nixCats"
-            ];
+
+          options = {
+            noice = {
+              cmdline = {
+                view = "cmdline";
+              };
+            };
           };
         };
         extra = { };

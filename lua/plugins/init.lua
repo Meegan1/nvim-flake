@@ -90,6 +90,9 @@ return {
 		import = "plugins.neotest",
 	},
 	{
+		import = "plugins.noice",
+	},
+	{
 		import = "plugins.nvim-surround",
 	},
 	{
