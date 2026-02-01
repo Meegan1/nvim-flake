@@ -62,6 +62,9 @@ let
 
       lspsAndRuntimeDeps = {
         general = with pkgs; [
+          perl5Packages.NeovimExt
+          python314Packages.pynvim
+          neovim-node-client
         ];
 
         git = with pkgs; [
@@ -72,12 +75,54 @@ let
           codesnap
         ];
 
+        conform = with pkgs; [
+          stylua
+          prettier
+        ];
+
         lsp = with pkgs; [
           lua-language-server
+          typescript-language-server
         ];
 
         treesitter = with pkgs; [
-          tree-sitter
+          (
+            let
+              src = pkgs.fetchFromGitHub {
+                owner = "tree-sitter";
+                repo = "tree-sitter";
+                tag = "v0.26.3";
+                hash = "sha256-G1C5IhRIVcWUwEI45ELxCKfbZnsJoqan7foSzPP3mMg="; # Replace with actual hash after first build attempt
+                fetchSubmodules = true;
+              };
+
+              name = "tree-sitter";
+              version = "0.26.3";
+            in
+            tree-sitter.overrideAttrs (oldAttrs: {
+              inherit version;
+
+              inherit src;
+
+              cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+                inherit src;
+                name = "${name}-${version}-vendor";
+                hash = "sha256-kHYLaiCHyKG+DL+T2s8yumNHFfndrB5aWs7ept0X4CM=";
+              };
+
+              buildInputs = [
+                pkgs.libclang
+              ]
+              ++ oldAttrs.buildInputs;
+
+              nativeBuildInputs = [
+                pkgs.rustPlatform.bindgenHook
+              ]
+              ++ oldAttrs.nativeBuildInputs;
+
+              patches = [ ];
+            })
+          )
         ];
       };
 
@@ -110,6 +155,7 @@ let
           (pkgs.lib.attrByPath [ scheme ] schemes.${defaultScheme} schemes);
 
         auto-session = pkgs.vimPlugins.auto-session;
+        dashboard = pkgs.vimPlugins.alpha-nvim;
         oil = pkgs.vimPlugins.oil-nvim;
       };
 
@@ -147,6 +193,11 @@ let
           vim-dadbod-ui
           vim-dadbod-completion
         ];
+        dap = with pkgs.vimPlugins; [
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-virtual-text
+        ];
         fzf-lua = pkgs.vimPlugins.fzf-lua;
         lualine =
           with pkgs.vimPlugins;
@@ -156,6 +207,7 @@ let
           ++ pkgs.lib.optionals packageDef.categories.copilot [
             copilot-lualine
           ];
+        surround = pkgs.vimPlugins.nvim-surround;
         which-key = pkgs.vimPlugins.which-key-nvim;
       };
 
@@ -205,7 +257,7 @@ let
         # they contain a settings set defined above
         # see :help nixCats.flake.outputs.settings
         settings = {
-          suffix-path = true;
+          suffix-path = false;
           suffix-LD = true;
           wrapRc = "UNWRAP_IT";
           unwrappedCfgPath = "/Users/meegan1/neovim";
@@ -236,9 +288,12 @@ let
           comment = true;
           copilot = true;
           dadbod = true;
+          dap = true;
+          dashboard = true;
           fzf-lua = true;
           lualine = true;
           oil = true;
+          surround = true;
           which-key = true;
 
           test = true;

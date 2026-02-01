@@ -11,6 +11,16 @@ return {
 	},
 	{
 		"vim-dadbod-ui",
+		dep_of = (function()
+			local deps = {}
+
+			if nixCats("blink") then
+				table.insert(deps, "blink.nvim")
+			end
+
+			return deps
+		end)(),
+		ft = { "sql", "mysql", "plsql" },
 		cmd = {
 			"DBUI",
 			"DBUIToggle",

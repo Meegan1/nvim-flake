@@ -42,6 +42,12 @@ return {
 		import = "plugins.dadbod",
 	},
 	{
+		import = "plugins.dap",
+	},
+	{
+		import = "plugins.dashboard",
+	},
+	{
 		import = "plugins.fzf-lua",
 	},
 	{
@@ -55,6 +61,9 @@ return {
 	},
 	{
 		import = "plugins.mcphub",
+	},
+	{
+		import = "plugins.nvim-surround",
 	},
 	{
 		import = "plugins.which-key",

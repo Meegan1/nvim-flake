@@ -25,7 +25,6 @@ return {
 				default = (function()
 					local s = {
 						nixCats("lsp") and "lsp" or nil,
-						nixCats("dadbod") and "dadbod" or nil,
 						"path",
 						"buffer",
 						nixCats("codecompanion") and "codecompanion" or nil,
@@ -41,6 +40,16 @@ return {
 					end
 
 					return filtered
+				end)(),
+
+				per_filetype = (function()
+					local per_filetyoe = {}
+
+					if nixCats("dadbod") then
+						per_filetyoe.sql = { "dadbod", "path", "buffer", "snippets" }
+					end
+
+					return per_filetyoe
 				end)(),
 
 				providers = (function()
