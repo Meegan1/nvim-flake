@@ -75,10 +75,16 @@ return {
 		import = "plugins.incline",
 	},
 	{
+		import = "plugins.kulala",
+	},
+	{
 		import = "plugins.lualine",
 	},
 	{
 		import = "plugins.mcphub",
+	},
+	{
+		import = "plugins.mdx",
 	},
 	{
 		import = "plugins.nvim-surround",

@@ -8,6 +8,11 @@
       url = "github:ravitemer/mcphub.nvim";
       flake = false;
     };
+    
+    plugins-mdx-nvim = {
+      url = "github:davidmh/mdx.nvim";
+      flake = false;
+    };
   };
 
   outputs =

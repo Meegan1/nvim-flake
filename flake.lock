@@ -80,12 +80,29 @@
         "type": "github"
       }
     },
+    "plugins-mdx-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764953110,
+        "narHash": "sha256-QaPYSTH59j8tUa5rTY8I9VdQWLkhy8SWhNigEXHFn1c=",
+        "owner": "davidmh",
+        "repo": "mdx.nvim",
+        "rev": "30222997ed4c0c7cc7447c4fce360fce87101bbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "davidmh",
+        "repo": "mdx.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
-        "plugins-mcphub-nvim": "plugins-mcphub-nvim"
+        "plugins-mcphub-nvim": "plugins-mcphub-nvim",
+        "plugins-mdx-nvim": "plugins-mdx-nvim"
       }
     }
   },
