@@ -228,6 +228,7 @@ let
         qmk = pkgs.vimPlugins.qmk-nvim;
         schemastore = pkgs.vimPlugins.SchemaStore-nvim;
         screenkey = pkgs.neovimPlugins.screenkey-nvim;
+        snacks = pkgs.vimPlugins.snacks-nvim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
@@ -336,6 +337,7 @@ let
           qmk = true;
           schemastore = true;
           screenkey = true;
+          snacks = true;
           surround = true;
           testing = true;
           which-key = true;

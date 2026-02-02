@@ -29,5 +29,12 @@ return {
 		})
 
 		vim.cmd.colorscheme("catppuccin")
+
+		if nixCats("noice") then
+			local C = require("catppuccin.palettes").get_palette()
+
+			vim.api.nvim_set_hl(0, "SnacksIndent", { fg = C.surface0 })
+			vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#3b4261" })
+		end
 	end,
 }

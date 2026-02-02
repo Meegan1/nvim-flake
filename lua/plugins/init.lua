@@ -123,6 +123,9 @@ return {
 		import = "plugins.smart-splits",
 	},
 	{
+		import = "plugins.snacks",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }
