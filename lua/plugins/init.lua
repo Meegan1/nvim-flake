@@ -57,6 +57,9 @@ return {
 		import = "plugins.dashboard",
 	},
 	{
+		import = "plugins.dropbar",
+	},
+	{
 		import = "plugins.flash",
 	},
 	{

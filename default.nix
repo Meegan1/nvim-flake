@@ -204,6 +204,7 @@ let
           nvim-dap-ui
           nvim-dap-virtual-text
         ];
+        dropbar = pkgs.vimPlugins.dropbar-nvim;
         flash = pkgs.vimPlugins.flash-nvim;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
         github = pkgs.vimPlugins.octo-nvim;
@@ -344,6 +345,7 @@ let
           dadbod = true;
           dap = true;
           dashboard = true;
+          dropbar = true;
           flash = true;
           fzf-lua = true;
           github = true;
