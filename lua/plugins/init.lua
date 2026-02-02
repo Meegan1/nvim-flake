@@ -102,6 +102,9 @@ return {
 		import = "plugins.octo",
 	},
 	{
+		import = "plugins.overseer",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }

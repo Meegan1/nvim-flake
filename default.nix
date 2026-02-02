@@ -220,6 +220,7 @@ let
           nui-nvim
         ];
         nx = pkgs.neovimPlugins.nx-nvim;
+        overseer = pkgs.vimPlugins.overseer-nvim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
@@ -322,6 +323,7 @@ let
           noice = true;
           nx = false;
           oil = true;
+          overseer = true;
           surround = true;
           testing = true;
           which-key = true;
