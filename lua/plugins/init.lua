@@ -96,6 +96,12 @@ return {
 		import = "plugins.nvim-surround",
 	},
 	{
+		import = "plugins.nx",
+	},
+	{
+		import = "plugins.octo",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }

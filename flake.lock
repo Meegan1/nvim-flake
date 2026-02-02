@@ -96,13 +96,30 @@
         "type": "github"
       }
     },
+    "plugins-nx-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705745682,
+        "narHash": "sha256-dYP+1LzMTe8UCYq+opWtNPWweIdKDcTbrzKYxo5L0j4=",
+        "owner": "Sewb21",
+        "repo": "nx.nvim",
+        "rev": "53f3eef7f05903d0767e8909d73eaf012a9dd971",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sewb21",
+        "repo": "nx.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-mcphub-nvim": "plugins-mcphub-nvim",
-        "plugins-mdx-nvim": "plugins-mdx-nvim"
+        "plugins-mdx-nvim": "plugins-mdx-nvim",
+        "plugins-nx-nvim": "plugins-nx-nvim"
       }
     }
   },

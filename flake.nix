@@ -8,9 +8,12 @@
       url = "github:ravitemer/mcphub.nvim";
       flake = false;
     };
-    
     plugins-mdx-nvim = {
       url = "github:davidmh/mdx.nvim";
+      flake = false;
+    };
+    plugins-nx-nvim = {
+      url = "github:Sewb21/nx.nvim";
       flake = false;
     };
   };

@@ -200,6 +200,7 @@ let
         ];
         flash = pkgs.vimPlugins.flash-nvim;
         fzf-lua = pkgs.vimPlugins.fzf-lua;
+        github = pkgs.vimPlugins.octo-nvim;
         glance = pkgs.vimPlugins.glance-nvim;
         grug-far = pkgs.vimPlugins.grug-far-nvim;
         hydra = pkgs.vimPlugins.hydra-nvim;
@@ -218,6 +219,7 @@ let
           noice-nvim
           nui-nvim
         ];
+        nx = pkgs.neovimPlugins.nx-nvim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
@@ -309,6 +311,7 @@ let
           dashboard = true;
           flash = true;
           fzf-lua = true;
+          github = true;
           glance = true;
           grug-far = true;
           hydra = true;
@@ -317,6 +320,7 @@ let
           lualine = true;
           mdx = true;
           noice = true;
+          nx = false;
           oil = true;
           surround = true;
           testing = true;
