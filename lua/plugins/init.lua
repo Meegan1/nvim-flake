@@ -105,6 +105,15 @@ return {
 		import = "plugins.overseer",
 	},
 	{
+		import = "plugins.project",
+	},
+	{
+		import = "plugins.qmk",
+	},
+	{
+		import = "plugins.render-markdown",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }

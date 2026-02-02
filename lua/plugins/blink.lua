@@ -1,7 +1,7 @@
 return {
 	"blink.cmp",
 	for_cat = "blink",
-	dep_of = { "codecompanion.nvim" },
+	priority = 1000,
 	after = function()
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config

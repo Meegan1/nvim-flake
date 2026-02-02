@@ -1,6 +1,7 @@
 return {
 	"fzf-lua",
 	for_cat = "fzf-lua",
+	priority = 1000,
 	after = function()
 		local fzf = require("fzf-lua")
 

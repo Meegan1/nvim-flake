@@ -214,6 +214,9 @@ let
           ++ pkgs.lib.optionals packageDef.categories.copilot [
             copilot-lualine
           ];
+        markdown = with pkgs.vimPlugins; [
+          render-markdown-nvim
+        ];
         mdx = pkgs.neovimPlugins.mdx-nvim;
         noice = with pkgs.vimPlugins; [
           noice-nvim
@@ -221,6 +224,8 @@ let
         ];
         nx = pkgs.neovimPlugins.nx-nvim;
         overseer = pkgs.vimPlugins.overseer-nvim;
+        project = pkgs.vimPlugins.project-nvim;
+        qmk = pkgs.vimPlugins.qmk-nvim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
@@ -319,11 +324,14 @@ let
           incline = true;
           kulala = true;
           lualine = true;
+          markdown = true;
           mdx = true;
           noice = true;
           nx = false;
           oil = true;
           overseer = true;
+          project = false;
+          qmk = true;
           surround = true;
           testing = true;
           which-key = true;
