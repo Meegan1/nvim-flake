@@ -1,29 +1,29 @@
--- Get the current buffer's path relative to project root
-local function get_relative_path()
-	-- Try to get the root directory using LSP workspace folders first
-	local root = vim.lsp.buf.list_workspace_folders()[1]
-
-	if not root then
-		-- Fallback: try to find git root
-		root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-	end
-
-	if not root then
-		-- If no root found, return the full path
-		return vim.fn.expand("%:p")
-	end
-
-	-- Get absolute path of current buffer
-	local absolute_path = vim.fn.expand("%:p")
-	-- Make it relative to the root
-	return vim.fn.fnamemodify(absolute_path, ":~:." .. root .. "/")
-end
-
 return {
 	{
 		"codecompanion.nvim",
 		for_cat = "codecompanion",
 		after = function()
+			-- Get the current buffer's path relative to project root
+			local function get_relative_path()
+				-- Try to get the root directory using LSP workspace folders first
+				local root = vim.lsp.buf.list_workspace_folders()[1]
+
+				if not root then
+					-- Fallback: try to find git root
+					root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+				end
+
+				if not root then
+					-- If no root found, return the full path
+					return vim.fn.expand("%:p")
+				end
+
+				-- Get absolute path of current buffer
+				local absolute_path = vim.fn.expand("%:p")
+				-- Make it relative to the root
+				return vim.fn.fnamemodify(absolute_path, ":~:." .. root .. "/")
+			end
+
 			local copilot_adapter = require("codecompanion.adapters").extend("copilot", {
 				schema = {
 					model = {
