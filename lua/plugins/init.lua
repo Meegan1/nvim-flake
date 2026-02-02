@@ -126,6 +126,9 @@ return {
 		import = "plugins.snacks",
 	},
 	{
+		import = "plugins.todo-comments",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }
