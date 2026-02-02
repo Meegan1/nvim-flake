@@ -254,7 +254,7 @@ return {
 					prompt = "Select model:",
 				}, function(model)
 					if model then
-						Chat:apply_model_or_command({ model = model })
+						Chat:change_model({ model = model })
 						vim.notify("Model changed to: " .. model)
 					end
 				end)
@@ -276,7 +276,7 @@ return {
 
 					local id = "<file>" .. path .. "</file>"
 
-					Chat.references:add({
+					Chat.context:add({
 						id = id,
 						path = path,
 						source = "codecompanion.strategies.chat.slash_commands.file",
