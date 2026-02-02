@@ -230,14 +230,16 @@ return {
 	{
 		"jsonls",
 		for_cat = "lsp",
-		lsp = {
-			settings = {
-				json = {
-					schemas = require("schemastore").json.schemas(),
-					validate = { enable = true },
+		lsp = function()
+			return {
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
 				},
-			},
-			root_markers = { ".git", "package.json" },
-		},
+				root_markers = { ".git", "package.json" },
+			}
+		end,
 	},
 }

@@ -1,5 +1,5 @@
 return {
-	"schemastore.nvim",
+	"SchemaStore.nvim",
 	for_cat = "schemastore",
-	dep_of = { "lsp" },
+	dep_of = { "jsonls" },
 }
