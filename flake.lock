@@ -112,6 +112,22 @@
         "type": "github"
       }
     },
+    "plugins-screenkey-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766951600,
+        "narHash": "sha256-HrVxE6dQBntp++9yll28bG17muAOj5uvzvUpulsZ800=",
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "rev": "68f03f52faf52ccfe954e5430ce17f7590bac2a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -119,7 +135,8 @@
         "nixpkgs": "nixpkgs",
         "plugins-mcphub-nvim": "plugins-mcphub-nvim",
         "plugins-mdx-nvim": "plugins-mdx-nvim",
-        "plugins-nx-nvim": "plugins-nx-nvim"
+        "plugins-nx-nvim": "plugins-nx-nvim",
+        "plugins-screenkey-nvim": "plugins-screenkey-nvim"
       }
     }
   },

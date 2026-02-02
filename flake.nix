@@ -16,6 +16,10 @@
       url = "github:Sewb21/nx.nvim";
       flake = false;
     };
+    plugins-screenkey-nvim = {
+      url = "github:NStefan002/screenkey.nvim";
+      flake = false;
+    };
   };
 
   outputs =

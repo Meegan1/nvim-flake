@@ -117,6 +117,9 @@ return {
 		import = "plugins.schemastore",
 	},
 	{
+		import = "plugins.screenkey",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }
