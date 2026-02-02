@@ -120,6 +120,9 @@ return {
 		import = "plugins.screenkey",
 	},
 	{
+		import = "plugins.smart-splits",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }

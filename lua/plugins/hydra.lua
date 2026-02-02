@@ -1,10 +1,5 @@
 return {
 	{
-		"smart-splits.nvim",
-		for_cat = "window-management",
-		dep_of = { "hydra.nvim" },
-	},
-	{
 		"hydra.nvim",
 		for_cat = { "hydra" },
 		config = function()
