@@ -1,3 +1,37 @@
+local ESC = vim.api.nvim_replace_termcodes("<esc>", true, true, true)
+
+local on_attach = function(client, bufnr)
+	-- Your on_attach function should set buffer-local lsp related settings
+	local nmap = function(keys, func, desc)
+		if desc then
+			desc = "LSP: " .. desc
+		end
+		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+	end
+	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+
+	nmap("gh", vim.lsp.buf.hover, "Show LSP Info")
+	nmap("gd", vim.lsp.buf.definition, "Open LSP Definition")
+	nmap("gi", vim.lsp.buf.implementation, "Open LSP Implementation")
+	nmap("gr", vim.lsp.buf.references, "Show LSP References")
+	nmap("go", vim.lsp.buf.type_definition, "Open Type Definition")
+	nmap("gs", vim.lsp.buf.signature_help, "Open Signature Help")
+
+	-- bind <Esc> to close hover windows globally
+	vim.on_key(function(key)
+		if key == ESC and (vim.fn.mode() == "n" or vim.fn.mode() == "v") then
+			for _, win in ipairs(vim.api.nvim_list_wins()) do
+				local config = vim.api.nvim_win_get_config(win)
+				if config.relative ~= "" then
+					vim.api.nvim_win_close(win, false)
+				end
+			end
+		end
+	end)
+	-- etc...
+end
+
 return {
 	{
 		"nvim-lspconfig",
@@ -12,41 +46,9 @@ return {
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous LSP Diagnostic" })
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next LSP Diagnostic" })
 
-			local ESC = vim.api.nvim_replace_termcodes("<esc>", true, true, true)
-
 			vim.lsp.config("*", {
 				-- capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					-- Your on_attach function should set buffer-local lsp related settings
-					local nmap = function(keys, func, desc)
-						if desc then
-							desc = "LSP: " .. desc
-						end
-						vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-					end
-					nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-					nmap("gh", vim.lsp.buf.hover, "Show LSP Info")
-					nmap("gd", vim.lsp.buf.definition, "Open LSP Definition")
-					nmap("gi", vim.lsp.buf.implementation, "Open LSP Implementation")
-					nmap("gr", vim.lsp.buf.references, "Show LSP References")
-					nmap("go", vim.lsp.buf.type_definition, "Open Type Definition")
-					nmap("gs", vim.lsp.buf.signature_help, "Open Signature Help")
-
-					-- bind <Esc> to close hover windows globally
-					vim.on_key(function(key)
-						if key == ESC and (vim.fn.mode() == "n" or vim.fn.mode() == "v") then
-							for _, win in ipairs(vim.api.nvim_list_wins()) do
-								local config = vim.api.nvim_win_get_config(win)
-								if config.relative ~= "" then
-									vim.api.nvim_win_close(win, false)
-								end
-							end
-						end
-					end)
-					-- etc...
-				end,
+				on_attach = on_attach,
 			})
 		end,
 	},
@@ -154,6 +156,8 @@ return {
 				end,
 			},
 			on_attach = function(client, bufnr)
+				on_attach(client, bufnr)
+
 				-- Enable inlay hints if nvim version is 0.10 or higher
 				if vim.fn.has("nvim-0.10") == 1 then
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
