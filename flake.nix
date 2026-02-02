@@ -37,9 +37,14 @@
           # Optional: use external flake logic, e.g.
           # inputs.foo.flakeModules.default
         ];
-        flake = {
-          # Put your original flake attributes here.
-        };
+        flake =
+          let
+            myNixCats = import ./default.nix { inherit inputs; };
+          in
+          {
+
+          }
+          // myNixCats;
         systems = [
           # systems for which you want to build the `perSystem` attributes
           "x86_64-linux"
@@ -55,11 +60,7 @@
             system,
             ...
           }:
-          let
-            myNixCats = import ./default.nix { inherit inputs; };
-          in
           {
-            packages = myNixCats.packages.${system};
           };
       }
     );
