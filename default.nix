@@ -226,6 +226,7 @@ let
         overseer = pkgs.vimPlugins.overseer-nvim;
         project = pkgs.vimPlugins.project-nvim;
         qmk = pkgs.vimPlugins.qmk-nvim;
+        schemastore = pkgs.vimPlugins.SchemaStore-nvim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
@@ -332,6 +333,7 @@ let
           overseer = true;
           project = false;
           qmk = true;
+          schemastore = true;
           surround = true;
           testing = true;
           which-key = true;

@@ -114,6 +114,9 @@ return {
 		import = "plugins.render-markdown",
 	},
 	{
+		import = "plugins.schemastore",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }
