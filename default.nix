@@ -313,7 +313,6 @@ let
           suffix-path = false;
           suffix-LD = true;
           wrapRc = "UNWRAP_IT";
-          unwrappedCfgPath = "/Users/meegan1/neovim";
           # IMPORTANT:
           # your alias may not conflict with your other packages.
           aliases = [ "vim" ];
