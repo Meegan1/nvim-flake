@@ -208,4 +208,36 @@ return {
 			end,
 		},
 	},
+	{
+		"yamlls",
+		for_cat = "lsp",
+		lsp = {
+			settings = {
+				yaml = {
+					schemas = {
+						kubernetes = "templates/**",
+						["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+						["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+						["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+						["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+						["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+					},
+				},
+			},
+			root_markers = { ".git", "package.json", "kustomization.yaml", "Chart.yaml" },
+		},
+	},
+	{
+		"jsonls",
+		for_cat = "lsp",
+		lsp = {
+			settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+					validate = { enable = true },
+				},
+			},
+			root_markers = { ".git", "package.json" },
+		},
+	},
 }

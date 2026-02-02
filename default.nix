@@ -83,6 +83,7 @@ let
         lsp = with pkgs; [
           lua-language-server
           typescript-language-server
+          yaml-language-server
         ];
 
         treesitter = with pkgs; [
