@@ -177,9 +177,11 @@ let
           lazydev-nvim
         ];
 
+        abolish = pkgs.vimPlugins.vim-abolish;
         arrow = pkgs.vimPlugins.arrow-nvim;
         autopairs = pkgs.vimPlugins.nvim-autopairs;
         blink = pkgs.vimPlugins.blink-cmp;
+        camelcase = pkgs.vimPlugins.camelcasemotion;
         codecompanion = with pkgs.vimPlugins; [
           codecompanion-nvim
           codecompanion-history-nvim
@@ -223,6 +225,7 @@ let
           render-markdown-nvim
         ];
         mdx = pkgs.neovimPlugins.mdx-nvim;
+        move = pkgs.vimPlugins.mini-move;
         multicursor = pkgs.vimPlugins.multicursors-nvim;
         noice = with pkgs.vimPlugins; [
           noice-nvim
@@ -232,14 +235,22 @@ let
         overseer = pkgs.vimPlugins.overseer-nvim;
         project = pkgs.vimPlugins.project-nvim;
         qmk = pkgs.vimPlugins.qmk-nvim;
+        repeat = pkgs.vimPlugins.vim-repeat;
         schemastore = pkgs.vimPlugins.SchemaStore-nvim;
         screenkey = pkgs.neovimPlugins.screenkey-nvim;
         snacks = pkgs.vimPlugins.snacks-nvim;
+        splitjoin = pkgs.vimPlugins.splitjoin-vim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [
           neotest
           neotest-vitest
           nvim-nio
+        ];
+        textobjects = with pkgs.vimPlugins; [
+          mini-ai
+          vim-textobj-user
+          vim-textobj-entire
+          vim-textobj-line
         ];
         todo-comments = pkgs.vimPlugins.todo-comments-nvim;
         trouble = pkgs.vimPlugins.trouble-nvim;
@@ -319,10 +330,12 @@ let
           themer = true;
           colorscheme = "catppuccin";
 
+          abolish = true;
           arrow = true;
           autopairs = true;
           auto-session = true;
           blink = true;
+          camelcase = true;
           codecompanion = true;
           codesnap = true;
           colorizer = true;
@@ -344,6 +357,7 @@ let
           lualine = true;
           markdown = true;
           mdx = true;
+          move = true;
           multicursor = true;
           noice = true;
           nx = false;
@@ -351,11 +365,14 @@ let
           overseer = true;
           project = false;
           qmk = true;
+          repeat = true;
           schemastore = true;
           screenkey = true;
           snacks = true;
+          splitjoin = true;
           surround = true;
           testing = true;
+          textobjects = true;
           todo-comments = true;
           trouble = true;
           typst = true;

@@ -12,6 +12,9 @@ return {
 		import = "plugins.lsp",
 	},
 	{
+		import = "plugins.abolish",
+	},
+	{
 		import = "plugins.arrow",
 	},
 	{
@@ -22,6 +25,9 @@ return {
 	},
 	{
 		import = "plugins.blink",
+	},
+	{
+		import = "plugins.camelcasemotion",
 	},
 	{
 		import = "plugins.codecompanion",
@@ -87,6 +93,9 @@ return {
 		import = "plugins.mdx",
 	},
 	{
+		import = "plugins.mini",
+	},
+	{
 		import = "plugins.multicursors",
 	},
 	{
@@ -117,6 +126,9 @@ return {
 		import = "plugins.render-markdown",
 	},
 	{
+		import = "plugins.repeat",
+	},
+	{
 		import = "plugins.schemastore",
 	},
 	{
@@ -127,6 +139,12 @@ return {
 	},
 	{
 		import = "plugins.snacks",
+	},
+	{
+		import = "plugins.splitjoin",
+	},
+	{
+		import = "plugins.textobjects",
 	},
 	{
 		import = "plugins.todo-comments",
