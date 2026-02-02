@@ -124,6 +124,10 @@ let
             })
           )
         ];
+
+        vectorcode = with pkgs; [
+          vectorcode
+        ];
       };
 
       startupPlugins = {
@@ -236,6 +240,13 @@ let
           nvim-nio
         ];
         todo-comments = pkgs.vimPlugins.todo-comments-nvim;
+        trouble = pkgs.vimPlugins.trouble-nvim;
+        typst = pkgs.vimPlugins.typst-preview-nvim;
+        ufo = with pkgs.vimPlugins; [
+          promise-async
+          nvim-ufo
+        ];
+        vectorcode = pkgs.vimPlugins.vectorcode-nvim;
         which-key = pkgs.vimPlugins.which-key-nvim;
         window-management = pkgs.vimPlugins.smart-splits-nvim;
       };
@@ -342,6 +353,10 @@ let
           surround = true;
           testing = true;
           todo-comments = true;
+          trouble = true;
+          typst = true;
+          ufo = true;
+          vectorcode = true;
           which-key = true;
           window-management = true;
 

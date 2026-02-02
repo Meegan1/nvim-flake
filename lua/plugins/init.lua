@@ -129,6 +129,18 @@ return {
 		import = "plugins.todo-comments",
 	},
 	{
+		import = "plugins.trouble",
+	},
+	{
+		import = "plugins.typst",
+	},
+	{
+		import = "plugins.ufo",
+	},
+	{
+		import = "plugins.vectorcode",
+	},
+	{
 		import = "plugins.which-key",
 	},
 }

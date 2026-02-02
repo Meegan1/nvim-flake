@@ -153,6 +153,55 @@ return {
 					vim.cmd("botright copen")
 				end,
 			},
+			on_attach = function(client, bufnr)
+				-- Enable inlay hints if nvim version is 0.10 or higher
+				if vim.fn.has("nvim-0.10") == 1 then
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end
+
+				-- ts_ls provides `source.*` code actions that apply to the whole file. These only appear in
+				-- `vim.lsp.buf.code_action()` if specified in `context.only`.
+				vim.api.nvim_buf_create_user_command(bufnr, "LspTypescriptSourceAction", function()
+					local source_actions = vim.tbl_filter(function(action)
+						return vim.startswith(action, "source.")
+					end, client.server_capabilities.codeActionProvider.codeActionKinds)
+
+					vim.lsp.buf.code_action({
+						context = {
+							diagnostics = {},
+							only = source_actions,
+						},
+					})
+				end, {})
+
+				vim.keymap.set("n", "<leader>ir", function()
+					vim.lsp.buf.code_action({
+						context = {
+							diagnostics = {},
+							---@diagnostic disable-next-line: assign-type-mismatch
+							only = { "source.removeUnused.ts" },
+						},
+						apply = true,
+					})
+				end, {
+					desc = "Remove unused imports",
+					buffer = bufnr,
+				})
+
+				vim.keymap.set("n", "<leader>if", function()
+					vim.lsp.buf.code_action({
+						context = {
+							diagnostics = {},
+							---@diagnostic disable-next-line: assign-type-mismatch
+							only = { "source.addMissingImports.ts" },
+						},
+						apply = true,
+					})
+				end, {
+					desc = "Fix imports",
+					buffer = bufnr,
+				})
+			end,
 		},
 	},
 }
