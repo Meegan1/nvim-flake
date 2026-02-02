@@ -84,6 +84,8 @@ let
           lua-language-server
           typescript-language-server
           yaml-language-server
+          vscode-langservers-extracted
+          nixd
         ];
 
         treesitter = with pkgs; [

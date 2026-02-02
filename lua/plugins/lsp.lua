@@ -239,6 +239,60 @@ return {
 					},
 				},
 				root_markers = { ".git", "package.json" },
+				filetypes = {
+					"json",
+					"jsonc",
+				},
+				command = "vscode-json-language-server",
+			}
+		end,
+	},
+	{
+		"nixd",
+		for_cat = "lsp",
+		lsp = function()
+			local function get_nixd_settings()
+				local sysname = vim.loop.os_uname().sysname
+				local username = os.getenv("USER")
+
+				local home_manager_expr
+				if sysname == "Darwin" then
+					local hostname = "macbook"
+					home_manager_expr = string.format(
+						"(builtins.getFlake (builtins.toString ./.)).darwinConfigurations.%s.options.home-manager.users.type.getSubOptions []",
+						hostname
+					)
+				elseif sysname == "Linux" then
+					local hostname = "nixos"
+					home_manager_expr = string.format(
+						"(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.%s.options.home-manager.users.%s.type.getSubOptions []",
+						hostname,
+						username
+					)
+				end
+
+				local options = {
+					home_manager = { expr = home_manager_expr },
+				}
+				if sysname == "Linux" then
+					options.nixos = {
+						expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.nixos.options',
+					}
+				end
+
+				return {
+					nixpkgs = { expr = "import <nixpkgs> { }" },
+					formatting = { command = { "nixfmt" } },
+					options = options,
+				}
+			end
+
+			return {
+				cmd = { "nixd" },
+				settings = {
+					nixd = get_nixd_settings(),
+				},
+				root_markers = { ".git", "flake.nix", "nixpkgs.json", "shell.nix", "default.nix" },
 			}
 		end,
 	},
