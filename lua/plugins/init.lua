@@ -87,6 +87,9 @@ return {
 		import = "plugins.mdx",
 	},
 	{
+		import = "plugins.multicursors",
+	},
+	{
 		import = "plugins.neotest",
 	},
 	{
@@ -141,6 +144,12 @@ return {
 		import = "plugins.vectorcode",
 	},
 	{
+		import = "plugins.vimtex",
+	},
+	{
 		import = "plugins.which-key",
+	},
+	{
+		import = "plugins.yaml-schema-crds",
 	},
 }

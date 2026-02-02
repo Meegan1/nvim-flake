@@ -1,4 +1,4 @@
-local CodeSnap = {}
+local M = {}
 
 local function get_visual_selection()
 	local bufnr = vim.api.nvim_get_current_buf()
@@ -86,7 +86,7 @@ local function get_option_value(cmd, option)
 	return nil -- Option not found
 end
 
-function CodeSnap.snapshot(opts)
+function M.snapshot(opts)
 	opts = opts or {}
 	local tmpfile = vim.fn.tempname() .. ".txt"
 	local outfile = opts.output or (vim.fn.getcwd() .. "/codesnap.png")
@@ -121,8 +121,8 @@ function CodeSnap.snapshot(opts)
 		"false",
 		"--watermark",
 		'""',
-    "--code-font-family",
-    '"Monaspace Neon"',
+		"--code-font-family",
+		'"Monaspace Neon"',
 		"--language",
 		vim.bo.filetype,
 	}
@@ -168,7 +168,7 @@ function CodeSnap.snapshot(opts)
 end
 
 vim.api.nvim_create_user_command("CodeSnap", function(opts)
-	CodeSnap.snapshot({ visual = opts.range > 0, clipboard = true })
+	M.snapshot({ visual = opts.range > 0, clipboard = true })
 end, { range = true })
 
-return CodeSnap
+return M

@@ -210,6 +210,7 @@ let
         hydra = pkgs.vimPlugins.hydra-nvim;
         incline = pkgs.vimPlugins.incline-nvim;
         kulala = pkgs.vimPlugins.kulala-nvim;
+        latex = pkgs.vimPlugins.vimtex;
         lualine =
           with pkgs.vimPlugins;
           [
@@ -222,6 +223,7 @@ let
           render-markdown-nvim
         ];
         mdx = pkgs.neovimPlugins.mdx-nvim;
+        multicursor = pkgs.vimPlugins.multicursors-nvim;
         noice = with pkgs.vimPlugins; [
           noice-nvim
           nui-nvim
@@ -338,9 +340,11 @@ let
           hydra = true;
           incline = true;
           kulala = true;
+          latex = true;
           lualine = true;
           markdown = true;
           mdx = true;
+          multicursor = true;
           noice = true;
           nx = false;
           oil = true;
@@ -359,6 +363,7 @@ let
           vectorcode = true;
           which-key = true;
           window-management = true;
+          yaml-schema-crds = true;
 
           test = true;
 
