@@ -173,4 +173,7 @@ return {
 	{
 		import = "plugins.yaml-schema-crds",
 	},
+	{
+		import = "plugins.zk",
+	},
 }

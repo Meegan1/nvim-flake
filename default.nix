@@ -131,6 +131,10 @@ let
         vectorcode = with pkgs; [
           vectorcode
         ];
+
+        zk = with pkgs; [
+          zk
+        ];
       };
 
       startupPlugins = {
@@ -266,6 +270,7 @@ let
         vectorcode = pkgs.vimPlugins.vectorcode-nvim;
         which-key = pkgs.vimPlugins.which-key-nvim;
         window-management = pkgs.vimPlugins.smart-splits-nvim;
+        zk = pkgs.vimPlugins.zk-nvim;
       };
 
       # shared libraries to be added to LD_LIBRARY_PATH
@@ -385,6 +390,7 @@ let
           which-key = true;
           window-management = true;
           yaml-schema-crds = true;
+          zk = true;
 
           test = true;
 
