@@ -27,6 +27,20 @@ return {
 			silent = false,
 		})
 
+		-- Create yesterday's daily note.
+		vim.keymap.set("n", "<leader>zy", function()
+			require("zk").new({
+				dir = "daily",
+				date = "yesterday",
+				group = "daily",
+				title = os.date("%Y-%m-%d", os.time() - 86400),
+			})
+		end, {
+			desc = "Create a new Zk daily note for yesterday",
+			noremap = true,
+			silent = false,
+		})
+
 		-- Open notes.
 		vim.keymap.set("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", {
 			desc = "Open Zk notes",
