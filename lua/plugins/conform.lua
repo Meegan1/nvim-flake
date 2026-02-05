@@ -83,6 +83,7 @@ return {
 				javascriptreact = prettier,
 				liquid = prettier,
 				json = prettier,
+				jsonc = prettier,
 				helm = prettier,
 				yaml = prettier,
 				nix = { "nixfmt", stop_after_first = true },
