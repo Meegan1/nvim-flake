@@ -66,7 +66,7 @@ return {
 			lspConfig(plugin)
 		end,
 		dep_of = "lua_ls",
-		load = function()
+		after = function()
 			require("lazydev").setup({
 				library = {
 					{
