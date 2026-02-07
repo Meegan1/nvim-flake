@@ -28,7 +28,7 @@ let
   # which you want to pass to the config set of nixpkgs
   # import nixpkgs { config = extra_pkg_config; inherit system; }
   extra_pkg_config = {
-    # allowUnfree = true;
+    allowUnfree = true;
   };
   dependencyOverlays = # (import ./overlays inputs) ++
     [
@@ -86,6 +86,7 @@ let
           yaml-language-server
           vscode-langservers-extracted
           nixd
+          copilot-language-server
         ];
 
         treesitter = with pkgs; [
