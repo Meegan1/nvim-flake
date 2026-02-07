@@ -64,6 +64,38 @@
         "type": "github"
       }
     },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769938695,
+        "narHash": "sha256-TJ6/xiFwyImPN2ABjsDymluhk2v3MVhetH+dTJAXMFI=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "2b5e081f48df165c1e67050bc0b85a4c939e0827",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770073207,
+        "narHash": "sha256-hWIN/wuDpSu8xwqPmdjQREKMbnPeo/nUybu3Z2q/emY=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "20bfe66fdfb1ee1a23994acec043191aa6d54e6e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
+      }
+    },
     "plugins-mcphub-nvim": {
       "flake": false,
       "locked": {
@@ -133,6 +165,8 @@
         "flake-parts": "flake-parts",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
         "plugins-mcphub-nvim": "plugins-mcphub-nvim",
         "plugins-mdx-nvim": "plugins-mdx-nvim",
         "plugins-nx-nvim": "plugins-nx-nvim",

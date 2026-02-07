@@ -20,6 +20,10 @@
       url = "github:NStefan002/screenkey.nvim";
       flake = false;
     };
+    plugins-lze = {
+      url = "github:BirdeeHub/lze";
+      flake = false;
+    };
   };
 
   outputs =

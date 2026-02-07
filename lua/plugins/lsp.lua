@@ -8,6 +8,7 @@ local on_attach = function(client, bufnr)
 		end
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
+
 	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
@@ -32,15 +33,20 @@ local on_attach = function(client, bufnr)
 	-- etc...
 end
 
+local lspConfig = function(plugin)
+	vim.lsp.config(plugin.name, type(plugin.lsp) == "function" and plugin.lsp() or plugin.lsp or {})
+end
+
+local lspEnable = function(pluginName)
+	require("lze").trigger_load("nvim-lspconfig")
+	vim.lsp.enable(pluginName)
+end
+
 return {
 	{
 		"nvim-lspconfig",
 		for_cat = "lsp",
 		priority = 50,
-		lsp = function(plugin)
-			vim.lsp.config(plugin.name, plugin.lsp or {})
-			vim.lsp.enable(plugin.name)
-		end,
 		before = function()
 			vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Open LSP diagnostic float" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous LSP Diagnostic" })
@@ -56,7 +62,11 @@ return {
 		"lazydev.nvim",
 		for_cat = "lsp",
 		ft = "lua",
-		after = function()
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		dep_of = "lua_ls",
+		load = function()
 			require("lazydev").setup({
 				library = {
 					{
@@ -70,6 +80,13 @@ return {
 	{
 		"lua_ls",
 		for_cat = "lsp",
+		ft = "lua",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
 		lsp = {
 			-- if you include a filetype, it doesnt call lspconfig for the list of filetypes (faster)
 			filetypes = { "lua" },
@@ -102,16 +119,20 @@ return {
 	{
 		"ts_ls",
 		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
 		lsp = {
 			init_options = { hostInfo = "neovim" },
 			cmd = { "typescript-language-server", "--stdio" },
 			filetypes = {
 				"javascript",
 				"javascriptreact",
-				"javascript.jsx",
 				"typescript",
 				"typescriptreact",
-				"typescript.tsx",
 			},
 			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 			handlers = {
@@ -211,6 +232,12 @@ return {
 	{
 		"yamlls",
 		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
 		lsp = {
 			settings = {
 				yaml = {
@@ -230,7 +257,15 @@ return {
 	{
 		"jsonls",
 		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
 		lsp = function()
+			require("lze").trigger_load("SchemaStore.nvim")
+
 			return {
 				settings = {
 					json = {
@@ -250,6 +285,12 @@ return {
 	{
 		"nixd",
 		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
 		lsp = function()
 			local function get_nixd_settings()
 				local sysname = vim.loop.os_uname().sysname
@@ -293,6 +334,44 @@ return {
 					nixd = get_nixd_settings(),
 				},
 				root_markers = { ".git", "flake.nix", "nixpkgs.json", "shell.nix", "default.nix" },
+			}
+		end,
+	},
+	{
+		"biome",
+		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
+		lsp = function()
+			return {
+				cmd = function(dispatchers, config)
+					local cmd = "biome"
+					local local_cmd = (config or {}).root_dir and config.root_dir .. "/node_modules/.bin/biome"
+					if local_cmd and vim.fn.executable(local_cmd) == 1 then
+						cmd = local_cmd
+					end
+					return vim.lsp.rpc.start({ cmd, "lsp-proxy" }, dispatchers)
+				end,
+				filetypes = {
+					"astro",
+					"css",
+					"graphql",
+					"html",
+					"javascript",
+					"javascriptreact",
+					"json",
+					"jsonc",
+					"svelte",
+					"typescript",
+					"typescriptreact",
+					"vue",
+				},
+				workspace_required = true,
+				root_markers = { "biome.json", "biome.jsonc", "package.json", ".git" },
 			}
 		end,
 	},

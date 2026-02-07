@@ -138,11 +138,13 @@ let
       };
 
       startupPlugins = {
-        general = with pkgs.vimPlugins; [
-          plenary-nvim
-          lze
-          lzextras
-        ];
+        general =
+          (with pkgs.vimPlugins; [
+            plenary-nvim
+          ])
+          ++ (with pkgs.neovimPlugins; [
+            lze
+          ]);
 
         lsp = with pkgs.vimPlugins; [
           nvim-lspconfig
