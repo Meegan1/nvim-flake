@@ -1,4 +1,4 @@
 return {
-	"CamelCaseMotion",
+	"camelcasemotion",
 	for_cat = "camelcase",
 }
