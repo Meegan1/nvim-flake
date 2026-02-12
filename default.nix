@@ -87,6 +87,7 @@ let
           vscode-langservers-extracted
           nixd
           copilot-language-server
+          astro-language-server
         ];
 
         treesitter = with pkgs; [

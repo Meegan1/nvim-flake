@@ -375,4 +375,18 @@ return {
 			}
 		end,
 	},
+	{
+		"astro",
+		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
+		lsp = {
+			filetypes = { "astro" },
+			root_markers = { "package.json", ".git" },
+		},
+	},
 }
