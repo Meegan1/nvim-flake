@@ -88,6 +88,7 @@ let
           nixd
           copilot-language-server
           astro-language-server
+          tailwindcss-language-server
         ];
 
         treesitter = with pkgs; [

@@ -389,4 +389,33 @@ return {
 			root_markers = { "package.json", ".git" },
 		},
 	},
+	{
+		"tailwindcss",
+		for_cat = "lsp",
+		before = function(plugin)
+			lspConfig(plugin)
+		end,
+		load = function(name)
+			lspEnable(name)
+		end,
+		lsp = {
+			filetypes = {
+				"html",
+				"css",
+				"scss",
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"astro",
+			},
+			root_markers = {
+				"tailwind.config.js",
+				"tailwind.config.cjs",
+				"tailwind.config.mjs",
+				"package.json",
+				".git",
+			},
+		},
+	},
 }
