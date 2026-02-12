@@ -5,7 +5,7 @@ return {
 		local devenv = require("utils.dev-env")
 		local file_exists = require("utils.file-exists")
 
-		local prettier = (
+		local biome = (
 			file_exists({
 					"biome.json",
 					"biome.toml",
@@ -15,6 +15,27 @@ return {
 					"biome-organize-imports",
 				}
 			or devenv.create_libs_table({
+				devenv.check_lib("dprint", function()
+					return file_exists({
+						"dprint.toml",
+						"dprint.json",
+					})
+				end),
+				devenv.check_lib("prettierd", function()
+					return true
+				end),
+				devenv.check_lib("prettier", function()
+					return true
+				end),
+			}, function(table)
+				table.stop_after_first = true
+
+				return table
+			end)
+		)
+
+		local prettier = (
+			devenv.create_libs_table({
 				devenv.check_lib("dprint", function()
 					return file_exists({
 						"dprint.toml",
@@ -77,22 +98,22 @@ return {
 			-- Define your formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = prettier,
-				typescript = prettier,
-				typescriptreact = prettier,
-				javascriptreact = prettier,
+				javascript = biome,
+				typescript = biome,
+				typescriptreact = biome,
+				javascriptreact = biome,
 				liquid = prettier,
-				json = prettier,
-				jsonc = prettier,
-				helm = prettier,
-				yaml = prettier,
+				json = biome,
+				jsonc = biome,
+				helm = biome,
+				yaml = biome,
 				nix = { "nixfmt", stop_after_first = true },
 				blade = prettier,
 				php = prettier,
 				astro = prettier,
-				mdx = prettier,
-				css = prettier,
-				scss = prettier,
+				mdx = biome,
+				css = biome,
+				scss = biome,
 				tex = { "tex-fmt" },
 			},
 			-- Set up format-on-save
