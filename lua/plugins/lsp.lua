@@ -416,6 +416,11 @@ return {
 				"package.json",
 				".git",
 			},
+			settings = {
+				tailwindCSS = {
+					classFunctions = { "tw", "clsx", "classnames", "cn", "twMerge" },
+				},
+			},
 		},
 	},
 }
