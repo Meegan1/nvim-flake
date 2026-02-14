@@ -387,6 +387,13 @@ return {
 		lsp = {
 			filetypes = { "astro" },
 			root_markers = { "package.json", ".git" },
+			capabilities = {
+				workspace = {
+					didChangeWatchedFiles = {
+						dynamicRegistration = true,
+					},
+				},
+			},
 		},
 	},
 	{
