@@ -13,6 +13,7 @@ return {
 				and {
 					"biome",
 					"biome-organize-imports",
+					"biome-check",
 				}
 			or devenv.create_libs_table({
 				devenv.check_lib("dprint", function()
