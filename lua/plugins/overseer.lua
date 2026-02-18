@@ -1,6 +1,7 @@
 return {
 	"overseer.nvim",
 	for_cat = "overseer",
+	dep_of = { "auto-session" },
 	after = function()
 		local get_sidebar = function()
 			return require("overseer.task_list.sidebar").get_or_create()
