@@ -191,7 +191,10 @@ let
 
         abolish = pkgs.vimPlugins.vim-abolish;
         arrow = pkgs.vimPlugins.arrow-nvim;
-        autopairs = pkgs.vimPlugins.nvim-autopairs;
+        autopairs = with pkgs.vimPlugins; [
+          nvim-autopairs
+          nvim-ts-autotag
+        ];
         blink = pkgs.vimPlugins.blink-cmp;
         camelcase = pkgs.vimPlugins.camelcasemotion;
         codecompanion = with pkgs.vimPlugins; [
