@@ -72,7 +72,7 @@ return {
 				})
 
 				if nixCats("which-key") then
-					require("lze").trigger_load("which-key")
+					require("lze").trigger_load("which-key.nvim")
 
 					local wk = require("which-key")
 
