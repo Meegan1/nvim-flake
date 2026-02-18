@@ -72,6 +72,8 @@ return {
 				})
 
 				if nixCats("which-key") then
+					require("lze").trigger_load("which-key")
+
 					local wk = require("which-key")
 
 					wk.add({
