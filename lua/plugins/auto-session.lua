@@ -97,15 +97,6 @@ return {
 			},
 
 			post_restore_cmds = {
-				function()
-					if nixCats("overseer") ~= true then
-						return
-					end
-
-					for _, task in ipairs(require("overseer").list_tasks({})) do
-						task:dispose(true)
-					end
-				end,
 				"stopinsert", -- Stop insert mode after restoring session
 			},
 
