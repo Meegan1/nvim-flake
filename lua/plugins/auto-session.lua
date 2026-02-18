@@ -44,7 +44,7 @@ return {
 			auto_restore = auto_restore_enabled,
 			auto_save = true,
 			suppressed_dirs = { "~/", "~/Documents/Projects", "~/Downloads", "/" },
-			bypass_save_filetypes = { "alpha" },
+			bypass_save_filetypes = { "alpha", "OverseerOutput" },
 			legacy_cmds = false,
 
 			-- only save session if we are inside a git repo
