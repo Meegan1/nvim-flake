@@ -58,6 +58,13 @@ return {
 				function()
 					vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
 				end,
+				function()
+					if nixCats("overseer") ~= true then
+						return
+					end
+
+					require("overseer.window").close()
+				end,
 			},
 
 			pre_restore_cmds = {
@@ -88,8 +95,6 @@ return {
 					if nixCats("overseer") ~= true then
 						return nil
 					end
-
-					require("overseer.window").close()
 
 					local tasks = require("overseer.task_list").list_tasks()
 					local cmds = {}
