@@ -56,9 +56,6 @@ return {
 			pre_save_cmds = {
 				close_all_floating_wins,
 				function()
-					vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
-				end,
-				function()
 					if nixCats("overseer") ~= true then
 						return
 					end
