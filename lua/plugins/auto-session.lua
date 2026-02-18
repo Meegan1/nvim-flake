@@ -86,7 +86,7 @@ return {
 			save_extra_cmds = {
 				function()
 					if nixCats("overseer") ~= true then
-						return
+						return nil
 					end
 
 					require("overseer.window").close()
