@@ -58,28 +58,6 @@ return {
 				function()
 					vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
 				end,
-				function()
-					if nixCats("overseer") ~= true then
-						return
-					end
-
-					require("overseer.window").close()
-
-					local tasks = require("overseer.task_list").list_tasks()
-					local cmds = {}
-					for _, task in ipairs(tasks) do
-						local json = vim.json.encode(task:serialize())
-						-- For some reason, vim.json.encode encodes / as \/.
-						json = string.gsub(json, "\\/", "/")
-						-- Escape single quotes so we can put this inside single quotes
-						json = string.gsub(json, "'", "\\'")
-						table.insert(
-							cmds,
-							string.format("lua require('overseer').new_task(vim.json.decode('%s')):start()", json)
-						)
-					end
-					return cmds
-				end,
 			},
 
 			pre_restore_cmds = {
@@ -106,6 +84,28 @@ return {
 
 			-- Save quickfix list and open it when restoring the session
 			save_extra_cmds = {
+				function()
+					if nixCats("overseer") ~= true then
+						return
+					end
+
+					require("overseer.window").close()
+
+					local tasks = require("overseer.task_list").list_tasks()
+					local cmds = {}
+					for _, task in ipairs(tasks) do
+						local json = vim.json.encode(task:serialize())
+						-- For some reason, vim.json.encode encodes / as \/.
+						json = string.gsub(json, "\\/", "/")
+						-- Escape single quotes so we can put this inside single quotes
+						json = string.gsub(json, "'", "\\'")
+						table.insert(
+							cmds,
+							string.format("lua require('overseer').new_task(vim.json.decode('%s')):start()", json)
+						)
+					end
+					return cmds
+				end,
 				function()
 					local qflist = vim.fn.getqflist()
 					-- return nil to clear any old qflist
