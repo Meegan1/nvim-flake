@@ -1,5 +1,5 @@
 return {
-	"snacks.nvim",
+	"snacks-nvim",
 	for_cat = "snacks",
 	priority = 1000,
 	lazy = false,
