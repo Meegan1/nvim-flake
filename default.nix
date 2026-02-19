@@ -254,7 +254,7 @@ let
         repeat = pkgs.vimPlugins.vim-repeat;
         schemastore = pkgs.vimPlugins.SchemaStore-nvim;
         screenkey = pkgs.neovimPlugins.screenkey-nvim;
-        snacks = pkgs.vimPlugins.snacks-nvim;
+        snacks = pkgs.neovimPlugins.snacks-nvim;
         splitjoin = pkgs.vimPlugins.splitjoin-vim;
         surround = pkgs.vimPlugins.nvim-surround;
         testing = with pkgs.vimPlugins; [

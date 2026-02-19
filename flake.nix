@@ -24,6 +24,10 @@
       url = "github:BirdeeHub/lze";
       flake = false;
     };
+    plugins-snacks-nvim = {
+      url = "github:folke/snacks.nvim";
+      flake = false;
+    };
   };
 
   outputs =
