@@ -1,5 +1,5 @@
 return {
-	"mcphub-nvim",
+	"mcphub.nvim",
 	for_cat = "codecompanion",
 	dep_of = { "codecompanion.nvim" },
 	after = function()

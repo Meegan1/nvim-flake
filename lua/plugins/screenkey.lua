@@ -1,5 +1,5 @@
 return {
-	"screenkey-nvim",
+	"screenkey.nvim",
 	for_cat = "screenkey",
 	lazy = false,
 }

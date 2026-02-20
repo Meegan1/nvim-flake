@@ -1,4 +1,4 @@
 return {
-	"mdx-nvim",
+	"mdx.nvim",
 	for_cat = "mdx",
 }

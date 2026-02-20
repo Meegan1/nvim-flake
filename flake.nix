@@ -4,19 +4,19 @@
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    plugins-mcphub-nvim = {
+    "plugins-mcphub.nvim" = {
       url = "github:ravitemer/mcphub.nvim";
       flake = false;
     };
-    plugins-mdx-nvim = {
+    "plugins-mdx-nvim" = {
       url = "github:davidmh/mdx.nvim";
       flake = false;
     };
-    plugins-nx-nvim = {
+    "plugins-nx.nvim" = {
       url = "github:Sewb21/nx.nvim";
       flake = false;
     };
-    plugins-screenkey-nvim = {
+    "plugins-screenkey.nvim" = {
       url = "github:NStefan002/screenkey.nvim";
       flake = false;
     };
@@ -24,8 +24,20 @@
       url = "github:BirdeeHub/lze";
       flake = false;
     };
-    plugins-snacks-nvim = {
+    "plugins-snacks.nvim" = {
       url = "github:folke/snacks.nvim";
+      flake = false;
+    };
+    plugins-nvim-nio = {
+      url = "github:nvim-neotest/nvim-nio";
+      flake = false;
+    };
+    plugins-neotest = {
+      url = "github:nvim-neotest/neotest";
+      flake = false;
+    };
+    "plugins-neotest.vitest" = {
+      url = "github:marilari88/neotest-vitest";
       flake = false;
     };
   };

@@ -37,7 +37,7 @@ let
       # `plugins-<pluginName>`
       # Once we add this overlay to our nixpkgs, we are able to
       # use `pkgs.neovimPlugins`, which is a set of our plugins.
-      (utils.standardPluginOverlay inputs)
+      (utils.sanitizedPluginOverlay inputs)
       # add any flake overlays here.
 
       # when other people mess up their overlays by wrapping them with system,
@@ -257,7 +257,7 @@ let
         snacks = pkgs.neovimPlugins.snacks-nvim;
         splitjoin = pkgs.vimPlugins.splitjoin-vim;
         surround = pkgs.vimPlugins.nvim-surround;
-        testing = with pkgs.vimPlugins; [
+        testing = with pkgs.neovimPlugins; [
           neotest
           neotest-vitest
           nvim-nio
@@ -447,7 +447,7 @@ forEachSystem (
         name = defaultPackageName;
         packages = [ defaultPackage ];
         inputsFrom = [ ];
-        shellHook = '''';
+        shellHook = "";
       };
     };
 
