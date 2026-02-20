@@ -96,7 +96,7 @@
         "type": "github"
       }
     },
-    "plugins-mdx-nvim": {
+    "plugins-mdx.nvim": {
       "flake": false,
       "locked": {
         "lastModified": 1764953110,
@@ -128,7 +128,7 @@
         "type": "github"
       }
     },
-    "plugins-neotest.vitest": {
+    "plugins-neotest-vitest": {
       "flake": false,
       "locked": {
         "lastModified": 1766446106,
@@ -215,9 +215,9 @@
         "nixpkgs": "nixpkgs",
         "plugins-lze": "plugins-lze",
         "plugins-mcphub.nvim": "plugins-mcphub.nvim",
-        "plugins-mdx-nvim": "plugins-mdx-nvim",
+        "plugins-mdx.nvim": "plugins-mdx.nvim",
         "plugins-neotest": "plugins-neotest",
-        "plugins-neotest.vitest": "plugins-neotest.vitest",
+        "plugins-neotest-vitest": "plugins-neotest-vitest",
         "plugins-nvim-nio": "plugins-nvim-nio",
         "plugins-nx.nvim": "plugins-nx.nvim",
         "plugins-screenkey.nvim": "plugins-screenkey.nvim",
