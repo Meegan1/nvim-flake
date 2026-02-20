@@ -91,11 +91,6 @@ return {
 		end
 
 		-- Files with hidden files and ignore .git
-		vim.keymap.set({ "n", "i", "v" }, "<C-p>", function()
-			find_files()
-		end, {
-			desc = "fzf-lua: files",
-		})
 		vim.keymap.set({ "n" }, "<leader>fd", function()
 			find_files()
 		end, {
@@ -103,11 +98,6 @@ return {
 		})
 
 		-- Commands
-		vim.keymap.set({ "n", "i", "v" }, "<C-S-P>", function()
-			fzf.commands()
-		end, {
-			desc = "fzf-lua: commands",
-		})
 		vim.keymap.set({ "n" }, "<leader>fc", function()
 			fzf.commands()
 		end, {
@@ -123,11 +113,6 @@ return {
 
 		-- Blines
 		-- Search in current file
-		vim.keymap.set("n", "<C-f>", function()
-			fzf.blines()
-		end, {
-			desc = "fzf-lua: blines",
-		})
 		vim.keymap.set("n", "<leader>fi", function()
 			fzf.blines()
 		end, {
@@ -135,11 +120,6 @@ return {
 		})
 
 		-- Live grep with hidden files
-		vim.keymap.set("n", "<C-S-F>", function()
-			find_live_grep()
-		end, {
-			desc = "fzf-lua: live grep",
-		})
 		vim.keymap.set("n", "<leader>fg", function()
 			find_live_grep()
 		end, {
@@ -147,11 +127,6 @@ return {
 		})
 
 		-- LSP workspace symbols
-		vim.keymap.set("n", "<C-t>", function()
-			fzf.lsp_workspace_symbols()
-		end, {
-			desc = "fzf-lua: lsp workspace symbols",
-		})
 		vim.keymap.set("n", "<leader>fs", function()
 			fzf.lsp_workspace_symbols()
 		end, {
