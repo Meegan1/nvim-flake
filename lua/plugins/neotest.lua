@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-nio",
 		for_cat = "testing",
-		dep_of = { "neotest" },
+		dep_of = { "neotest", "nvim-dap-ui" },
 	},
 	{
 		"neotest-vitest",
