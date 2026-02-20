@@ -36,7 +36,7 @@
       url = "github:nvim-neotest/neotest";
       flake = false;
     };
-    "plugins-neotest.vitest" = {
+    plugins-neotest-vitest = {
       url = "github:marilari88/neotest-vitest";
       flake = false;
     };
