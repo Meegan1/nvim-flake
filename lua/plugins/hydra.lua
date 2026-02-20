@@ -2,7 +2,7 @@ return {
 	{
 		"hydra.nvim",
 		for_cat = { "hydra" },
-		config = function()
+		after = function()
 			local Hydra = require("hydra")
 
 			if nixCats("window-management") then
