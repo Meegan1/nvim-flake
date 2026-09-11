@@ -15,6 +15,10 @@ return {
 			require("lze").trigger_load("blink-cmp-git")
 			require("lze").trigger_load("blink-emoji.nvim")
 
+			if nixCats("codecompanion") then
+				require("lze").trigger_load("codecompanion.nvim")
+			end
+
 			---@module 'blink.cmp'
 			---@type blink.cmp.Config
 			local config = {
