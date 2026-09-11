@@ -1,6 +1,54 @@
-local function get_git_ignored_files()
-	-- Get the list of ignored files using git
-	local proc = vim.system({
+local git_ignored = nil
+local git_ignored_cwd = nil
+
+local function apply_git_ignored_files(result)
+	local files, dirs, full_paths = {}, {}, {}
+
+	if result.code == 0 then
+		for line in vim.gsplit(result.stdout or "", "\n", { plain = true, trimempty = true }) do
+			-- Store full paths for checking parent directories
+			local path = line:gsub("/$", "")
+			full_paths[path] = true
+
+			-- Store directory paths separately
+			if line:sub(-1) == "/" then
+				-- Get just the directory name, not the full path
+				dirs[vim.fn.fnamemodify(path, ":t")] = true
+			else
+				-- Get just the filename, not the full path
+				files[vim.fn.fnamemodify(path, ":t")] = true
+			end
+		end
+	end
+
+	git_ignored = { files = files, dirs = dirs, full_paths = full_paths }
+
+	-- Re-render visible oil buffers with the fresh ignore information
+	vim.schedule(function()
+		for _, win in ipairs(vim.api.nvim_list_wins()) do
+			local buf = vim.api.nvim_win_get_buf(win)
+			if vim.bo[buf].ft == "oil" then
+				pcall(function()
+					require("oil.view").rerender_all_oil_buffers({ refetch = false })
+				end)
+			end
+		end
+	end)
+end
+
+-- Kick off (or refresh) the async git ignored-files computation. Never blocks.
+local function request_git_ignored_files(force)
+	local cwd = vim.fn.getcwd()
+	if git_ignored == "pending" and git_ignored_cwd == cwd then
+		return
+	end
+	if not force and type(git_ignored) == "table" and git_ignored_cwd == cwd then
+		return
+	end
+
+	git_ignored_cwd = cwd
+	git_ignored = "pending"
+	vim.system({
 		"git",
 		"ls-files",
 		"--others",
@@ -8,39 +56,10 @@ local function get_git_ignored_files()
 		"--exclude-standard",
 		"--directory",
 	}, {
-		cwd = vim.fn.getcwd(),
+		cwd = cwd,
 		text = true,
-	})
-
-	local result = proc:wait()
-
-	local git_ignored_files = {}
-	local git_ignored_dirs = {}
-	local git_ignored_full_paths = {}
-
-	if result.code == 0 then
-		for line in vim.gsplit(result.stdout, "\n", { plain = true, trimempty = true }) do
-			-- Store full paths for checking parent directories
-			git_ignored_full_paths[line:gsub("/$", "")] = true
-
-			-- Store directory paths separately
-			if line:match("/$") then
-				local dir_name = line:gsub("/$", "")
-				-- Get just the directory name, not the full path
-				local base_dir = vim.fn.fnamemodify(dir_name, ":t")
-				git_ignored_dirs[base_dir] = true
-			else
-				-- Get just the filename, not the full path
-				local file_name = vim.fn.fnamemodify(line, ":t")
-				git_ignored_files[file_name] = true
-			end
-		end
-	end
-
-	return git_ignored_files, git_ignored_dirs, git_ignored_full_paths
+	}, apply_git_ignored_files)
 end
-
-local git_ignored_files, git_ignored_dirs, git_ignored_full_paths = get_git_ignored_files()
 
 return {
 	"oil.nvim",
@@ -71,7 +90,9 @@ return {
 						return nil
 					end
 
-					if git_ignored_files[entry.name] or git_ignored_dirs[entry.name] then
+					local ignored = git_ignored
+
+					if type(ignored) == "table" and (ignored.files[entry.name] or ignored.dirs[entry.name]) then
 						return "OilGitIgnored" -- Gray out git-ignored files
 					end
 
@@ -86,10 +107,11 @@ return {
 
 					-- Check all parent directories
 					local path_parts = {}
+					local full_paths = type(ignored) == "table" and ignored.full_paths or {}
 					for part in vim.gsplit(path_to_check, "/", { plain = true }) do
 						table.insert(path_parts, part)
 						local partial_path = table.concat(path_parts, "/")
-						if git_ignored_full_paths[partial_path] then
+						if full_paths[partial_path] then
 							return "OilGitIgnored"
 						end
 					end
@@ -115,8 +137,8 @@ return {
 		local refresh = require("oil.actions").refresh
 		local original_refresh = refresh.callback
 		refresh.callback = function(...)
-			-- Refresh the list of git ignored files
-			git_ignored_files, git_ignored_dirs, git_ignored_full_paths = get_git_ignored_files()
+			-- Refresh the list of git ignored files (async, non-blocking)
+			request_git_ignored_files(true)
 
 			-- Call the original refresh function
 			original_refresh(...)
@@ -139,5 +161,9 @@ return {
 		vim.keymap.set("n", "_", function()
 			require("oil").open(vim.fn.getcwd())
 		end, { noremap = true, desc = "Open current working directory" })
+
+		-- Warm up the git ignored files list asynchronously so the first oil
+		-- render is never blocked by `git ls-files`
+		request_git_ignored_files()
 	end,
 }

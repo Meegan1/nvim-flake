@@ -246,6 +246,7 @@ return {
 	{
 		"yamlls",
 		for_cat = "lsp",
+		ft = { "yaml", "yml" },
 		before = function(plugin)
 			lspConfig(plugin)
 		end,
@@ -277,6 +278,7 @@ return {
 	{
 		"jsonls",
 		for_cat = "lsp",
+		ft = { "json", "jsonc" },
 		before = function(plugin)
 			lspConfig(plugin)
 		end,

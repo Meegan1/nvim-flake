@@ -1,6 +1,7 @@
 return {
 	"arrow.nvim",
 	for_cat = "arrow",
+	keys = { ";", "m" },
 	after = function()
 		require("arrow").setup({
 			show_icons = true,

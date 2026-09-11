@@ -13,9 +13,14 @@ vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.undofile = true
 
--- spell check
-vim.opt.spell = true
-vim.opt.spelllang = "en_us"
+-- spell check (deferred: enabling spell loads en_us.spl, ~12ms at startup)
+vim.api.nvim_create_autocmd("UIEnter", {
+	once = true,
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = "en_us"
+	end,
+})
 
 -- splitright and splitbelow
 vim.opt.splitright = true

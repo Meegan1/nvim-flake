@@ -7,6 +7,7 @@ return {
 	{
 		"nvim-ufo",
 		for_cat = "ufo",
+		event = { "BufReadPost", "BufNewFile" },
 		after = function()
 			vim.opt.foldcolumn = "0"
 			vim.opt.foldlevel = 99

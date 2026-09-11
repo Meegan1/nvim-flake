@@ -2,6 +2,7 @@ return {
 	"mcphub.nvim",
 	for_cat = "codecompanion",
 	dep_of = { "codecompanion.nvim" },
+	keys = "<leader>mh",
 	after = function()
 		local async = require("plenary.async")
 		local Path = require("plenary.path")

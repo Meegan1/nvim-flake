@@ -1,6 +1,7 @@
 return {
 	"qmk.nvim",
 	for_cat = "qmk",
+	ft = "dts",
 	after = function()
 		---@type qmk.UserConfig
 		local conf = {

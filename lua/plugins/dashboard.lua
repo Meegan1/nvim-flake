@@ -56,6 +56,25 @@ return {
 			dashboard.button("q", "  Quit", ":qa<CR>"),
 		}
 
+		-- alpha's own VimEnter autostart draws the dashboard over freshly restored
+		-- sessions (auto-session clears the arglist mid-restore, defeating alpha's
+		-- argc check), so mirror auto-session's restore condition instead: the
+		-- dashboard only opens when nvim was launched without file/dir arguments
+		local launch_has_args = #vim.fn.argv() > 0
+
+		dashboard.opts.autostart = false
+
 		require("alpha").setup(dashboard.opts)
+
+		vim.api.nvim_create_autocmd("VimEnter", {
+			pattern = "*",
+			callback = function()
+				if launch_has_args then
+					return
+				end
+
+				require("alpha").start(true, dashboard.opts)
+			end,
+		})
 	end,
 }

@@ -2,6 +2,8 @@ return {
 	{
 		"codecompanion.nvim",
 		for_cat = "codecompanion",
+		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionToggle" },
+		keys = { "<leader>cc", "<leader>cC", "<leader>ci", "<leader>ca", "<leader>cm", "<leader>cb" },
 		after = function()
 			-- Choose the adapter/model based on whether the "copilot" nixCats category is enabled
 			local use_copilot = nixCats("copilot")

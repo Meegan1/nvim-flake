@@ -1,6 +1,7 @@
 return {
 	"octo.nvim",
 	for_cat = "github",
+	cmd = { "Octo", "CheckoutIssue" },
 	after = function()
 		require("octo").setup({
 			picker = "snacks",
