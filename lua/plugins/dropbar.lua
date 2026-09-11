@@ -43,24 +43,29 @@ return {
 
 					return {
 						sources.path,
-						path = {
-							relative_to = function(buf, win)
-								-- Show full path in oil or fugitive buffers
-								local bufname = vim.api.nvim_buf_get_name(buf)
-								if vim.startswith(bufname, "oil://") then
-									local root = bufname:gsub("^%S+://", "", 1)
-									while root and root ~= vim.fs.dirname(root) do
-										root = vim.fs.dirname(root)
-									end
-									return root
-								end
-
-								local ok, cwd = pcall(vim.fn.getcwd, win)
-								return ok and cwd or vim.fn.getcwd()
-							end,
-						},
 					}
 				end,
+			},
+
+			sources = {
+				path = {
+					relative_to = function(buf, win)
+						local bufname = vim.api.nvim_buf_get_name(buf)
+						local ok, cwd = pcall(vim.fn.getcwd, win)
+						cwd = ok and cwd or vim.uv.cwd()
+						if vim.startswith(bufname, "oil://") then
+							return cwd
+						end
+						local root = bufname:match("^(.-)/%.bare/worktrees/")
+						if not root then
+							if bufname ~= cwd and not vim.startswith(bufname, cwd .. "/") then
+								return "/"
+							end
+							root = vim.fs.root(bufname, { ".git" })
+						end
+						return root or cwd
+					end,
+				},
 			},
 			menu = {
 				preview = false,
