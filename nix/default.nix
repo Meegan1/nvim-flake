@@ -44,12 +44,11 @@ let
       # with "curl: (23) client returned ERROR on write". Building it from the
       # plugin source and placing it in the plugin package prevents that.
       (final: prev: {
-        neovimPlugins =
-          (prev.neovimPlugins or { })
-          // {
-            codediff-nvim = prev.neovimPlugins.codediff-nvim.overrideAttrs (old: {
-              postInstall = (old.postInstall or "") + ''
-                cp ${final.stdenv.mkDerivation {
+        neovimPlugins = (prev.neovimPlugins or { }) // {
+          codediff-nvim = prev.neovimPlugins.codediff-nvim.overrideAttrs (old: {
+            postInstall = (old.postInstall or "") + ''
+              cp ${
+                final.stdenv.mkDerivation {
                   pname = "libvscode-diff";
                   version = nixpkgs.lib.trim (builtins.readFile "${inputs."plugins-codediff.nvim"}/VERSION");
                   src = inputs."plugins-codediff.nvim";
@@ -64,10 +63,11 @@ let
                     cp "$lib" $out/libvscode_diff.dylib
                     runHook postInstall
                   '';
-                }}/libvscode_diff.dylib "$out/libvscode_diff_$(cat "$out/VERSION").dylib"
-              '';
-            });
-          };
+                }
+              }/libvscode_diff.dylib "$out/libvscode_diff_$(cat "$out/VERSION").dylib"
+            '';
+          });
+        };
       })
       # add any flake overlays here.
 
