@@ -33,6 +33,9 @@ return {
 		import = "plugins.codecompanion",
 	},
 	{
+		import = "plugins.codediff",
+	},
+	{
 		import = "plugins.codesnap",
 	},
 	{

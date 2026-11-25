@@ -38,6 +38,37 @@ let
       # Once we add this overlay to our nixpkgs, we are able to
       # use `pkgs.neovimPlugins`, which is a set of our plugins.
       (utils.sanitizedPluginOverlay inputs)
+      # Bundle codediff.nvim's native library into the plugin package.
+      # The plugin normally downloads `libvscode_diff_<version>.dylib` into its
+      # own directory at runtime, which always fails on the read-only Nix store
+      # with "curl: (23) client returned ERROR on write". Building it from the
+      # plugin source and placing it in the plugin package prevents that.
+      (final: prev: {
+        neovimPlugins =
+          (prev.neovimPlugins or { })
+          // {
+            codediff-nvim = prev.neovimPlugins.codediff-nvim.overrideAttrs (old: {
+              postInstall = (old.postInstall or "") + ''
+                cp ${final.stdenv.mkDerivation {
+                  pname = "libvscode-diff";
+                  version = nixpkgs.lib.trim (builtins.readFile "${inputs."plugins-codediff.nvim"}/VERSION");
+                  src = inputs."plugins-codediff.nvim";
+                  nativeBuildInputs = [ final.cmake ];
+                  # OpenMP is optional upstream (parallel char-level diff);
+                  # disable it for a dependency-free sequential build.
+                  cmakeFlags = [ "-DENABLE_OPENMP=OFF" ];
+                  installPhase = ''
+                    runHook preInstall
+                    mkdir -p $out
+                    lib="$(find . \( -name 'libvscode_diff*.dylib' -o -name 'libvscode_diff*.so' \) -not -path '*/CMakeFiles/*' | head -1)"
+                    cp "$lib" $out/libvscode_diff.dylib
+                    runHook postInstall
+                  '';
+                }}/libvscode_diff.dylib "$out/libvscode_diff_$(cat "$out/VERSION").dylib"
+              '';
+            });
+          };
+      })
       # add any flake overlays here.
 
       # when other people mess up their overlays by wrapping them with system,
@@ -220,6 +251,7 @@ let
           codecompanion-history-nvim
           mcphub-nvim
         ];
+        codediff = pkgs.neovimPlugins.codediff-nvim;
         colorizer = pkgs.vimPlugins.nvim-colorizer-lua;
         conform = pkgs.vimPlugins.conform-nvim;
         comment = with pkgs.vimPlugins; [
@@ -376,6 +408,7 @@ let
           camelcase = true;
           codecompanion = true;
           codesnap = true;
+          codediff = true;
           colorizer = true;
           conform = true;
           comment = true;

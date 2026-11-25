@@ -77,6 +77,10 @@
       url = "github:milanglacier/minuet-ai.nvim";
       flake = false;
     };
+    "plugins-codediff.nvim" = {
+      url = "github:esmuellert/codediff.nvim";
+      flake = false;
+    };
   };
 
   outputs =

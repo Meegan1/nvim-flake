@@ -201,6 +201,22 @@
         "type": "github"
       }
     },
+    "plugins-codediff.nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794605208,
+        "narHash": "sha256-hzeMFNrptA3MO1htsQtcASla9zaoC8r2KKpwQvCuRMw=",
+        "owner": "esmuellert",
+        "repo": "codediff.nvim",
+        "rev": "eee54e78e6f152a6eb03b090e95f7576c96a5ad9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "esmuellert",
+        "repo": "codediff.nvim",
+        "type": "github"
+      }
+    },
     "plugins-copilot.lua": {
       "flake": false,
       "locked": {
@@ -435,6 +451,7 @@
         "plugins-blink-emoji.nvim": "plugins-blink-emoji.nvim",
         "plugins-codecompanion-history.nvim": "plugins-codecompanion-history.nvim",
         "plugins-codecompanion.nvim": "plugins-codecompanion.nvim",
+        "plugins-codediff.nvim": "plugins-codediff.nvim",
         "plugins-copilot.lua": "plugins-copilot.lua",
         "plugins-dropbar.nvim": "plugins-dropbar.nvim",
         "plugins-fzf-lua": "plugins-fzf-lua",
