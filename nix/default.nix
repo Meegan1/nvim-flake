@@ -429,7 +429,7 @@ let
           lualine = true;
           markdown = true;
           mdx = true;
-          minuet = true;
+          minuet = false;
           move = true;
           multicursor = false;
           noice = true;
