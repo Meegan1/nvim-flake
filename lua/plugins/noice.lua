@@ -8,7 +8,8 @@ return {
 		for_cat = "noice",
 		event = "DeferredUIEnter",
 		dependencies = {
-			"MunifTanjim/nui.nvim",
+			-- must match the spec name declared above, not the repo slug
+			"nui.nvim",
 		},
 		after = function()
 			-- HACK: noice shows messages from before it was enabled,
