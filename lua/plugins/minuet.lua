@@ -3,7 +3,7 @@ return {
 	for_cat = "minuet",
 	after = function()
 		require("minuet").setup({
-			provider = "codestral",
+			provider = "openai_compatible",
 			request_timeout = 2.5,
 			throttle = 350, -- Increase to reduce costs and avoid rate limits
 			debounce = 150, -- Increase to reduce costs and avoid rate limits
