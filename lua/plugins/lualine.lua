@@ -108,7 +108,9 @@ return {
 							end,
 						},
 						{
-							require("minuet.lualine"),
+							function()
+								require("minuet.lualine")
+							end,
 							cond = function()
 								return nixCats("minuet")
 							end,
