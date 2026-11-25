@@ -2,7 +2,13 @@ return {
 	{
 		"codecompanion.nvim",
 		for_cat = "codecompanion",
-		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionToggle" },
+		cmd = {
+			"CodeCompanion",
+			"CodeCompanionChat",
+			"CodeCompanionActions",
+			"CodeCompanionToggle",
+			"GenCommitMessage",
+		},
 		keys = { "<leader>cc", "<leader>cC", "<leader>ci", "<leader>ca", "<leader>cm", "<leader>cb" },
 		after = function()
 			-- Choose the adapter/model based on whether the "copilot" nixCats category is enabled
@@ -236,8 +242,82 @@ return {
 							vim.fn.getcwd() .. "/.prompts",
 						},
 					},
+
+					-- Generate a commit message for the currently staged changes.
+					-- Runs through the inline interaction so the message is written
+					-- straight into the commit buffer (e.g. fugitive's COMMIT_EDITMSG
+					-- window) instead of a chat buffer. See :GenCommitMessage below.
+					-- Recent commit subjects are fed to the model so it copies the
+					-- repository's own convention (some use Conventional Commits,
+					-- others don't).
+					["Commit Message"] = {
+						interaction = "inline",
+						description = "Generate a commit message for the staged changes",
+						opts = {
+							alias = "commit_msg",
+							-- The fast model is plenty for commit messages
+							adapter = {
+								name = adapter_name,
+								model = adapter_flash_model,
+							},
+							-- Stream the result into the buffer above the cursor, which
+							-- puts it on the first line of the commit message window
+							placement = "before",
+						},
+						prompts = {
+							{
+								role = "system",
+								content = "You are an expert at writing git commit messages. You will be given the subject lines from the repository's recent commit history and a git diff. Write a commit message that matches the style and convention of that history exactly (e.g. Conventional Commits prefixes like 'feat:' or 'fix:', capitalisation, punctuation and language). If the history gives no clear convention, follow the latest commit's convention. The subject line must use imperative mood and stay under 72 characters. Reply with the commit message only: no markdown fences, no preamble and no diff.",
+							},
+							{
+								role = "user",
+								content = function()
+									local function git(args)
+										local ok, out = pcall(function()
+											return vim.system(args, { text = true }):wait().stdout
+										end)
+										return ok and vim.trim(out or "") or ""
+									end
+
+									local diff = git({ "git", "diff", "--no-ext-diff", "--staged" })
+									if diff == "" then
+										return "No changes are currently staged."
+									end
+
+									local message = "Generate a commit message for me based on this git diff.\n\n"
+
+									-- Copy the repo's own convention from recent history so
+									-- repos with and without Conventional Commits both match
+									local subjects = git({ "git", "log", "-n", "25", "--format=%s" })
+									if subjects ~= "" then
+										message = message
+											.. "First, here are the subject lines of the most recent commits in this repository. Copy their style and convention exactly:\n\n```\n"
+											.. subjects
+											.. "\n```\n\n"
+									end
+
+									return message .. "Here is the diff to commit:\n\n````diff\n" .. diff .. "\n````"
+								end,
+							},
+						},
+					},
 				},
 			})
+
+			-- Generate a commit message for the staged changes and insert it into
+			-- the current buffer. Intended to be run from the commit message
+			-- window opened by fugitive (or plain `git commit`). The command is
+			-- lazy-loaded via the spec's `cmd` list, so it also works before
+			-- codecompanion has loaded.
+			vim.api.nvim_create_user_command("GenCommitMessage", function()
+				local ok, diff = pcall(function()
+					return vim.system({ "git", "diff", "--no-ext-diff", "--staged" }, { text = true }):wait().stdout
+				end)
+				if not ok or vim.trim(diff or "") == "" then
+					return vim.notify("No staged changes to generate a commit message for", vim.log.levels.WARN)
+				end
+				vim.cmd("CodeCompanion /commit_msg")
+			end, { desc = "Generate a commit message for the staged changes" })
 
 			vim.keymap.set({ "n", "x" }, "<leader>cc", function()
 				vim.cmd("CodeCompanionChat Toggle")
